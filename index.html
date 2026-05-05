@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LA BOTIGUETA - Cafeteria i Dolços Artesanals</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#FDFBF7',
+                        coffee: {
+                            light: '#8C6C5A',
+                            DEFAULT: '#5C4033',
+                            dark: '#3E2723'
+                        },
+                        beige: '#F5EFE6',
+                        pastel: '#E8A274',
+                        garnet: '#8B3A3A'
+                    },
+                    fontFamily: {
+                        serif: ['Lora', 'serif'],
+                        sans: ['Nunito', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Styles for smooth scrolling and animations */
+        html { scroll-behavior: smooth; }
+        
+        .hero-pattern {
+            background-color: #5C4033;
+            background-image: radial-gradient(#8C6C5A 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .card-image-bg {
+            background: linear-gradient(135deg, #FDFBF7 0%, #F5EFE6 100%);
+        }
+
+        /* Hover animation for product cards */
+        .product-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(92, 64, 51, 0.1), 0 10px 10px -5px rgba(92, 64, 51, 0.04);
+            border-color: #E8A274;
+        }
+
+        .allergen-tooltip {
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .allergen-icon:hover .allergen-tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        /* Schedule Animation */
+        .schedule-card:hover .day-badge {
+            background-color: #8B3A3A;
+            color: #FDFBF7;
+        }
+        
+        /* Modal Animation */
+        #productModal.active #modalContentWrapper {
+            transform: scale(1);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-cream text-coffee-dark font-sans antialiased selection:bg-pastel selection:text-coffee-dark">
+
+    <!-- Header / Navbar -->
+    <header class="fixed w-full top-0 z-50 bg-cream/90 backdrop-blur-md border-b border-beige shadow-sm transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <span class="text-3xl">🥨</span>
+                    <h1 class="font-serif text-2xl font-semibold text-coffee-dark">LA BOTIGUETA</h1>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#inici" class="text-coffee hover:text-garnet font-semibold transition-colors">Inici</a>
+                    <a href="#menu" class="text-coffee hover:text-garnet font-semibold transition-colors">El Nostre Menú</a>
+                    <a href="#activitats" class="text-coffee hover:text-garnet font-semibold transition-colors">Activitats Sorpresa</a>
+                    <a href="#contacte" class="text-coffee hover:text-garnet font-semibold transition-colors">Contacte</a>
+                </nav>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-coffee hover:text-garnet focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-cream border-t border-beige">
+            <a href="#inici" class="block px-4 py-3 text-coffee hover:bg-beige transition-colors">Inici</a>
+            <a href="#menu" class="block px-4 py-3 text-coffee hover:bg-beige transition-colors">El Nostre Menú</a>
+            <a href="#activitats" class="block px-4 py-3 text-coffee hover:bg-beige transition-colors">Activitats Sorpresa</a>
+            <a href="#contacte" class="block px-4 py-3 text-coffee hover:bg-beige transition-colors">Contacte</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inici" class="pt-32 pb-20 md:pt-40 md:pb-28 hero-pattern relative overflow-hidden">
+        <div class="absolute inset-0 bg-coffee-dark/80"></div> <!-- Overlay -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <h2 class="text-4xl md:text-5xl lg:text-6xl font-serif text-cream mb-6 font-semibold tracking-wide">
+                El racó més dolç <br class="hidden md:block"/> del teu dia
+            </h2>
+            <p class="text-lg md:text-xl text-beige mb-10 max-w-2xl mx-auto font-light">
+                Elaborem les nostres postres i pans diàriament amb ingredients de primera qualitat, amor i molta paciència. Vine i sent-te com a casa.
+            </p>
+            <a href="#menu" class="inline-block bg-pastel hover:bg-white text-coffee-dark font-bold py-3 px-8 rounded-full shadow-lg transition-all transform hover:scale-105">
+                Veure el Menú
+            </a>
+        </div>
+        <!-- Decorative shape bottom -->
+        <div class="absolute bottom-0 w-full overflow-hidden leading-none">
+            <svg class="relative block w-full h-[50px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.08,130.83,119.28,193.39,109.11,236.43,101.8,279.7,80.12,321.39,56.44Z" class="fill-cream"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-16 bg-cream">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-serif font-semibold text-coffee-dark mb-4">Les Nostres Delícies</h3>
+                <div class="w-24 h-1 bg-pastel mx-auto rounded-full mb-8"></div>
+                
+                <!-- Allergen Legend -->
+                <div class="bg-beige rounded-2xl p-6 max-w-4xl mx-auto shadow-sm border border-coffee-light/20">
+                    <h4 class="text-lg font-semibold text-coffee mb-4">Guia d'Al·lèrgens</h4>
+                    <div class="flex flex-wrap justify-center gap-4 sm:gap-6">
+                        <div class="flex items-center gap-2"><span class="text-2xl">🌾</span> <span class="text-sm font-medium">Gluten</span></div>
+                        <div class="flex items-center gap-2"><span class="text-2xl">🥛</span> <span class="text-sm font-medium">Lactis</span></div>
+                        <div class="flex items-center gap-2"><span class="text-2xl">🥚</span> <span class="text-sm font-medium">Ou</span></div>
+                        <div class="flex items-center gap-2"><span class="text-2xl">🥜</span> <span class="text-sm font-medium">Fruits de pela</span></div>
+                        <div class="flex items-center gap-2"><span class="text-2xl">🐟</span> <span class="text-sm font-medium">Peix</span></div>
+                        <div class="flex items-center gap-2"><span class="text-2xl">🌱</span> <span class="text-sm font-medium">Soja</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                
+                <!-- Product 1 (Sprite: Croissant) -->
+                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group">
+                    <div class="h-48 border-b border-beige overflow-hidden relative bg-white">
+                        <div class="w-full h-full group-hover:scale-110 transition-transform duration-500" style="background-image: url('ChatGPT Image 5 may 2026, 11_37_55.png'); background-size: 200% 200%; background-position: 0% 0%; background-repeat: no-repeat;"></div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h5 class="text-xl font-serif font-bold text-coffee-dark">Croissant de xocolata</h5>
+                            <span class="font-bold text-garnet">1.00€</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">Full de pasta cruixent farcit d'una intensa xocolata fosa i decorat amb cacau.</p>
+                        <div class="flex gap-1 pt-3 border-t border-beige/50">
+                            <span class="text-lg" title="Gluten">🌾</span>
+                            <span class="text-lg" title="Lactis">🥛</span>
+                            <span class="text-lg" title="Ou">🥚</span>
+                            <span class="text-lg" title="Soja">🌱</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Product 2 (Sprite: Coca de crema) -->
+                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group">
+                    <div class="h-48 border-b border-beige overflow-hidden relative bg-white">
+                        <div class="w-full h-full group-hover:scale-110 transition-transform duration-500" style="background-image: url('ChatGPT Image 5 may 2026, 11_41_50.png'); background-size: 200% 200%; background-position: 0% 100%; background-repeat: no-repeat;"></div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h5 class="text-xl font-serif font-bold text-coffee-dark">Coca de crema i nous</h5>
+                            <span class="font-bold text-garnet">1.00€</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">Massa tendra coberta de suau crema pastissera casolana i nous cruixents.</p>
+                        <div class="flex gap-1 pt-3 border-t border-beige/50">
+                            <span class="text-lg" title="Gluten">🌾</span>
+                            <span class="text-lg" title="Lactis">🥛</span>
+                            <span class="text-lg" title="Ou">🥚</span>
+                            <span class="text-lg" title="Fruits de pela">🥜</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Product 3 (Sprite: Coca de recapte) -->
+                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group">
+                    <div class="h-48 border-b border-beige overflow-hidden relative bg-white">
+                        <div class="w-full h-full group-hover:scale-110 transition-transform duration-500" style="background-image: url('ChatGPT Image 5 may 2026, 11_41_50.png'); background-size: 200% 200%; background-position: 0% 0%; background-repeat: no-repeat;"></div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h5 class="text-xl font-serif font-bold text-coffee-dark leading-tight">Coca de recapte</h5>
+                            <span class="font-bold text-garnet ml-2">1.00€</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">Tradicional massa salada amb escalivada de l'hort i llom de tonyina.</p>
+                        <div class="flex gap-1 pt-3 border-t border-beige/50">
+                            <span class="text-lg" title="Gluten">🌾</span>
+                            <span class="text-lg" title="Peix">🐟</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Product 4 (Sprite: Pizza) -->
+                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group">
+                    <div class="h-48 border-b border-beige overflow-hidden relative bg-white">
+                        <div class="w-full h-full group-hover:scale-110 transition-transform duration-500" style="background-image: url('ChatGPT Image 5 may 2026, 11_37_49.png'); background-size: 200% 200%; background-position: 100% 100%; background-repeat: no-repeat;"></div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h5 class="text-xl font-serif font-bold text-coffee-dark">Pizza (porció)</h5>
+                            <span class="font-bold text-garnet">1.00€</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">Porció artesanal de massa mare amb tomàquet casolà, mozzarella i alfàbrega.</p>
+                        <div class="flex gap-1 pt-3 border-t border-beige/50">
+                            <span class="text-lg" title="Gluten">🌾</span>
+                            <span class="text-lg" title="Lactis">🥛</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Product 5 (Sprite: Rotllos de canyella) -->
+                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group">
+                    <div class="h-48 border-b border-beige overflow-hidden relative bg-white">
+                        <div class="w-full h-full group-hover:scale-110 transition-transform duration-500" style="background-image: url('ChatGPT Image 5 may 2026, 11_41_50.png'); background-size: 200% 200%; background-position: 100% 100%; background-repeat: no-repeat;"></div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h5 class="text-xl font-serif font-bold text-coffee-dark">Rotllos de canyella</h5>
+                            <span class="font-bold text-garnet">1.40€</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">Espirals de canyella esponjosos i calentonets, coberts amb glacejat de vainilla.</p>
+                        <div class="flex gap-1 pt-3 border-t border-beige/50">
+                            <span class="text-lg" title="Gluten">🌾</span>
+                            <span class="text-lg" title="Lactis">🥛</span>
+                            <span class="text-lg" title="Ou">🥚</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Product 6 (Sprite: Pastís pastanaga) -->
+                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group">
+                    <div class="h-48 border-b border-beige overflow-hidden relative bg-white">
+                        <div class="w-full h-full group-hover:scale-110 transition-transform duration-500" style="background-image: url('ChatGPT Image 5 may 2026, 11_37_55.png'); background-size: 200% 200%; background-position: 0% 100%; background-repeat: no-repeat;"></div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h5 class="text-xl font-serif font-bold text-coffee-dark">Pastís de pastanaga</h5>
+                            <span class="font-bold text-garnet">1.60€</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">Sucós bescuit especiat de pastanaga amb el clàssic i suau frosting de formatge crema.</p>
+                        <div class="flex gap-1 pt-3 border-t border-beige/50">
+                            <span class="text-lg" title="Gluten">🌾</span>
+                            <span class="text-lg" title="Lactis">🥛</span>
+                            <span class="text-lg" title="Ou">🥚</span>
+                            <span class="text-lg" title="Fruits de pela">🥜</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Product 7 (Sprite: Red Velvet) -->
+                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group">
+                    <div class="h-48 border-b border-beige overflow-hidden relative bg-white">
+                        <div class="w-full h-full group-hover:scale-110 transition-transform duration-500" style="background-image: url('ChatGPT Image 5 may 2026, 11_37_55.png'); background-size: 200% 200%; background-position: 100% 0%; background-repeat: no-repeat;"></div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h5 class="text-xl font-serif font-bold text-coffee-dark">Red velvet</h5>
+                            <span class="font-bold text-garnet">1.60€</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">El nostre pastís envellutat de cacau suau, vibrant i amb un glacejat irresistible.</p>
+                        <div class="flex gap-1 pt-3 border-t border-beige/50">
+                            <span class="text-lg" title="Gluten">🌾</span>
+                            <span class="text-lg" title="Lactis">🥛</span>
+                            <span class="text-lg" title="Ou">🥚</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Product 8 (Sprite: Galetes de mantega) -->
+                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group">
+                    <div class="h-48 border-b border-beige overflow-hidden relative bg-white">
+                        <div class="w-full h-full group-hover:scale-110 transition-transform duration-500" style="background-image: url('ChatGPT Image 5 may 2026, 11_45_11.png'); background-size: 200% 200%; background-position: 0% 100%; background-repeat: no-repeat;"></div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h5 class="text-xl font-serif font-bold text-coffee-dark">Galetes de mantega</h5>
+                            <span class="font-bold text-garnet">0.80€</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">Galetes tradicionals de pura mantega que es desfan a la boca.</p>
+                        <div class="flex gap-1 pt-3 border-t border-beige/50">
+                            <span class="text-lg" title="Gluten">🌾</span>
+                            <span class="text-lg" title="Lactis">🥛</span>
+                            <span class="text-lg" title="Ou">🥚</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Product 9 (Sprite: Xuxo de crema) -->
+                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group">
+                    <div class="h-48 border-b border-beige overflow-hidden relative bg-white">
+                        <div class="w-full h-full group-hover:scale-110 transition-transform duration-500" style="background-image: url('ChatGPT Image 5 may 2026, 11_37_49.png'); background-size: 200% 200%; background-position: 0% 0%; background-repeat: no-repeat;"></div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h5 class="text-xl font-serif font-bold text-coffee-dark">Xuxos de crema</h5>
+                            <span class="font-bold text-garnet">1.00€</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">Tendra massa fregida arrebossada en sucre i farcida d'abundant crema pastissera.</p>
+                        <div class="flex gap-1 pt-3 border-t border-beige/50">
+                            <span class="text-lg" title="Gluten">🌾</span>
+                            <span class="text-lg" title="Lactis">🥛</span>
+                            <span class="text-lg" title="Ou">🥚</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Product 10 (Sprite: Magdalenes) -->
+                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group">
+                    <div class="h-48 border-b border-beige overflow-hidden relative bg-white">
+                        <div class="w-full h-full group-hover:scale-110 transition-transform duration-500" style="background-image: url('ChatGPT Image 5 may 2026, 11_37_55.png'); background-size: 200% 200%; background-position: 100% 100%; background-repeat: no-repeat;"></div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h5 class="text-xl font-serif font-bold text-coffee-dark">Magdalenes</h5>
+                            <span class="font-bold text-garnet">0.90€</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">Esponjoses, daurades i amb el seu característic copet. L'acompanyant ideal del cafè.</p>
+                        <div class="flex gap-1 pt-3 border-t border-beige/50">
+                            <span class="text-lg" title="Gluten">🌾</span>
+                            <span class="text-lg" title="Lactis">🥛</span>
+                            <span class="text-lg" title="Ou">🥚</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Product 11 (Sprite: Pastís Santiago) -->
+                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group relative">
+                    <div class="absolute top-4 right-4 bg-pastel text-coffee-dark text-xs font-bold px-2 py-1 rounded-full shadow z-10">Sense Gluten</div>
+                    <div class="h-48 border-b border-beige overflow-hidden relative bg-white">
+                        <div class="w-full h-full group-hover:scale-110 transition-transform duration-500" style="background-image: url('ChatGPT Image 5 may 2026, 11_45_11.png'); background-size: 200% 200%; background-position: 100% 100%; background-repeat: no-repeat;"></div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h5 class="text-xl font-serif font-bold text-coffee-dark">Pastís de Santiago</h5>
+                            <span class="font-bold text-garnet">1.60€</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">Deliciosa recepta tradicional a base d'ametlles i decorada amb sucre de llustre.</p>
+                        <div class="flex gap-1 pt-3 border-t border-beige/50">
+                            <span class="text-lg" title="Ou">🥚</span>
+                            <span class="text-lg" title="Fruits de pela">🥜</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Product 13 (Sprite: Pa massa mare) -->
+                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group">
+                    <div class="h-48 border-b border-beige overflow-hidden relative bg-white">
+                        <div class="w-full h-full group-hover:scale-110 transition-transform duration-500" style="background-image: url('ChatGPT Image 5 may 2026, 11_37_49.png'); background-size: 200% 200%; background-position: 0% 100%; background-repeat: no-repeat;"></div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h5 class="text-xl font-serif font-bold text-coffee-dark">Pa de massa mare</h5>
+                            <span class="font-bold text-garnet">1.50€</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">Pa rústic d'elaboració lenta amb crosta cruixent i molla alveolada. Pur sabor.</p>
+                        <div class="flex gap-1 pt-3 border-t border-beige/50">
+                            <span class="text-lg" title="Gluten">🌾</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Product 14 (Sprite: Pa de llavors) -->
+                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group">
+                    <div class="h-48 border-b border-beige overflow-hidden relative bg-white">
+                        <div class="w-full h-full group-hover:scale-110 transition-transform duration-500" style="background-image: url('ChatGPT Image 5 may 2026, 11_37_49.png'); background-size: 200% 200%; background-position: 100% 0%; background-repeat: no-repeat;"></div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h5 class="text-xl font-serif font-bold text-coffee-dark">Pa de llavors</h5>
+                            <span class="font-bold text-garnet">1.80€</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">El nostre pa de massa mare estrella amb barreja de llavors torrades i farina integral.</p>
+                        <div class="flex gap-1 pt-3 border-t border-beige/50">
+                            <span class="text-lg" title="Gluten">🌾</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Product 15 (Sprite: Catànies) -->
+                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group relative">
+                    <div class="absolute top-4 right-4 bg-pastel text-coffee-dark text-xs font-bold px-2 py-1 rounded-full shadow z-10">Sense Gluten</div>
+                    <div class="h-48 border-b border-beige overflow-hidden relative bg-white">
+                        <div class="w-full h-full group-hover:scale-110 transition-transform duration-500" style="background-image: url('ChatGPT Image 5 may 2026, 11_41_50.png'); background-size: 200% 200%; background-position: 100% 0%; background-repeat: no-repeat;"></div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h5 class="text-xl font-serif font-bold text-coffee-dark">Bossa de catànies</h5>
+                            <span class="font-bold text-garnet">1.00€</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">Bossa de 15 unitats d'ametlla marcona torrada i caramel·litzada, coberta de praliné i cacau.</p>
+                        <div class="flex gap-1 pt-3 border-t border-beige/50">
+                            <span class="text-lg" title="Lactis">🥛</span>
+                            <span class="text-lg" title="Fruits de pela">🥜</span>
+                            <span class="text-lg" title="Soja">🌱</span>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities / Surprises Section -->
+    <section id="activitats" class="py-16 bg-beige/50 border-t border-b border-beige">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-serif font-semibold text-coffee-dark mb-4">Sorpreses dels Dimarts</h3>
+                <div class="w-24 h-1 bg-garnet mx-auto rounded-full mb-6"></div>
+                <p class="text-lg text-coffee mb-2">Tots els dimarts us mimem amb una activitat o degustació <strong class="text-garnet">gratuïta</strong>, diferent segons la setmana del mes!</p>
+                <p class="text-sm text-coffee-light font-medium uppercase tracking-wider">Durant l'obertura: de 10:00h a 11:00h</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- 1st Tuesday -->
+                <div class="schedule-card bg-white rounded-2xl p-6 text-center shadow-sm border border-beige transition-all duration-300 cursor-default">
+                    <div class="day-badge inline-block bg-cream text-coffee-dark font-bold text-xs px-3 py-1 rounded-full mb-4 transition-colors duration-300 border border-beige">1r Dimarts del mes</div>
+                    <div class="text-5xl mb-3 drop-shadow-md">☁️</div>
+                    <h5 class="font-serif font-bold text-coffee-dark">Cotó fluix de sucre</h5>
+                    <p class="text-xs text-gray-500 mt-2">Fet al moment per als més petits (i grans!).</p>
+                </div>
+                <!-- 2nd Tuesday -->
+                <div class="schedule-card bg-white rounded-2xl p-6 text-center shadow-sm border border-beige transition-all duration-300 cursor-default">
+                    <div class="day-badge inline-block bg-cream text-coffee-dark font-bold text-xs px-3 py-1 rounded-full mb-4 transition-colors duration-300 border border-beige">2n Dimarts del mes</div>
+                    <div class="text-5xl mb-3 drop-shadow-md">🥞</div>
+                    <h5 class="font-serif font-bold text-coffee-dark">Creps de xocolata</h5>
+                    <p class="text-xs text-gray-500 mt-2">Mini creps calents amb la nostra millor xocolata fosa.</p>
+                </div>
+                <!-- 3rd Tuesday -->
+                <div class="schedule-card bg-white rounded-2xl p-6 text-center shadow-sm border border-beige transition-all duration-300 cursor-default">
+                    <div class="day-badge inline-block bg-cream text-coffee-dark font-bold text-xs px-3 py-1 rounded-full mb-4 transition-colors duration-300 border border-beige">3r Dimarts del mes</div>
+                    <div class="text-5xl mb-3 drop-shadow-md">☕</div>
+                    <h5 class="font-serif font-bold text-coffee-dark">Xocolata calenta</h5>
+                    <p class="text-xs text-gray-500 mt-2">Xupitos de xocolata calenta a la tassa per entrar en calor.</p>
+                </div>
+                <!-- 4th/5th Tuesday -->
+                <div class="schedule-card bg-white rounded-2xl p-6 text-center shadow-sm border border-beige transition-all duration-300 cursor-default">
+                    <div class="day-badge inline-block bg-cream text-coffee-dark font-bold text-xs px-3 py-1 rounded-full mb-4 transition-colors duration-300 border border-beige">Darrers Dimarts del mes</div>
+                    <div class="text-5xl mb-3 drop-shadow-md">🍰</div>
+                    <h5 class="font-serif font-bold text-coffee-dark">Tast de pastissos</h5>
+                    <p class="text-xs text-gray-500 mt-2">Celebrem la fi de mes provant bocins dels nostres pastissos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Contact -->
+    <footer id="contacte" class="bg-coffee-dark text-beige pt-16 pb-8 border-t-4 border-pastel">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12 text-center md:text-left">
+                <!-- Brand -->
+                <div>
+                    <h4 class="text-2xl font-serif font-bold text-cream mb-4 flex items-center justify-center md:justify-start gap-2">
+                        <span>🥨</span> LA BOTIGUETA
+                    </h4>
+                    <p class="text-coffee-light mb-4">Enfornant felicitat a foc lent. Especialistes en fer que els teus matins siguin molt més dolços.</p>
+                </div>
+                
+                <!-- Schedule -->
+                <div>
+                    <h4 class="text-xl font-serif font-bold text-cream mb-4">Horari</h4>
+                    <ul class="space-y-2 text-coffee-light">
+                        <li class="flex justify-between md:justify-start md:gap-4"><span class="font-semibold text-beige">Dimarts:</span> 10:00 - 11:00</li>
+                        <li class="flex justify-between md:justify-start md:gap-4"><span class="font-semibold text-pastel">Resta de la setmana:</span> Tancat</li>
+                    </ul>
+                </div>
+                
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="text-xl font-serif font-bold text-cream mb-4">Troba'ns</h4>
+                    <ul class="space-y-2 text-coffee-light">
+                        <li class="flex items-center justify-center md:justify-start gap-2 text-sm md:text-base">
+                            <span class="flex-shrink-0">📍</span> Carrer Estel, 2, 43850 Cambrils, Tarragona
+                        </li>
+                        <li class="flex items-center justify-center md:justify-start gap-2">
+                            <span>📞</span> 977 79 28 37
+                        </li>
+                        <li class="flex items-center justify-center md:justify-start gap-2 text-sm md:text-base">
+                            <span class="flex-shrink-0">✉️</span> e3007038@xtec.cat
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-coffee/30 pt-8 text-center text-coffee-light text-sm">
+            <p>&copy; <span id="currentYear"></span> LA BOTIGUETA. Tots els drets reservats.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Product Modal (Lightbox) -->
+<div id="productModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 sm:p-6">
+    <!-- Backdrop -->
+    <div id="modalBackdrop" class="absolute inset-0 bg-coffee-dark/80 backdrop-blur-sm transition-opacity cursor-pointer"></div>
+    
+    <!-- Modal Content -->
+    <div id="modalContentWrapper" class="bg-cream rounded-3xl max-w-4xl w-full relative z-10 overflow-hidden shadow-2xl transform transition-all duration-300 scale-95 opacity-0 flex flex-col md:flex-row max-h-[90vh]">
+        
+        <!-- Close Button -->
+        <button id="closeModalBtn" class="absolute top-4 right-4 bg-white/90 hover:bg-white text-coffee-dark rounded-full p-2 z-20 shadow-sm transition-colors focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+        
+        <!-- Visual Area (Image/Emoji) -->
+        <div id="modalVisual" class="w-full md:w-1/2 h-64 md:h-auto flex items-center justify-center bg-beige/30 border-b md:border-b-0 md:border-r border-beige">
+            <!-- Content injected via JS -->
+        </div>
+        
+        <!-- Text Area -->
+        <div class="w-full md:w-1/2 p-6 md:p-10 flex flex-col justify-center overflow-y-auto">
+            <h3 id="modalTitle" class="text-3xl md:text-4xl font-serif font-bold text-coffee-dark mb-2"></h3>
+            <span id="modalPrice" class="text-2xl font-bold text-garnet mb-6 block"></span>
+            <p id="modalDesc" class="text-gray-600 text-lg mb-8 leading-relaxed"></p>
+            
+            <div>
+                <h4 class="text-sm font-bold text-coffee-light uppercase tracking-wider mb-3">Conté els següents al·lèrgens:</h4>
+                <div id="modalAllergens" class="flex gap-2 flex-wrap">
+                    <!-- Content injected via JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript for Mobile Menu, Utilities & Modal -->
+<script>
+    // Set current year in footer
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    // Mobile Menu Toggle
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+
+    btn.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+    });
+
+    // Close mobile menu when clicking a link
+    const menuLinks = menu.querySelectorAll('a');
+    menuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            menu.classList.add('hidden');
+        });
+    });
+
+    // Navbar shadow on scroll
+    window.addEventListener('scroll', () => {
+        const nav = document.getElementById('navbar');
+        if (window.scrollY > 10) {
+            nav.classList.add('shadow-md');
+            nav.classList.remove('shadow-sm');
+        } else {
+            nav.classList.remove('shadow-md');
+            nav.classList.add('shadow-sm');
+        }
+    });
+
+    // --- Product Modal Logic ---
+    const modal = document.getElementById('productModal');
+    const modalContentWrapper = document.getElementById('modalContentWrapper');
+    const modalVisual = document.getElementById('modalVisual');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalPrice = document.getElementById('modalPrice');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalAllergens = document.getElementById('modalAllergens');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const modalBackdrop = document.getElementById('modalBackdrop');
+
+    // Function to open modal
+    function openModal(card) {
+        // Extract data from the clicked card
+        const title = card.querySelector('h5').innerText;
+        const price = card.querySelector('.text-garnet').innerText;
+        const desc = card.querySelector('.text-gray-600').innerText;
+        const allergensHTML = card.querySelector('.border-t').innerHTML;
+        
+        // Extract and clean up the visual element
+        const visualContainer = card.querySelector('.h-48').cloneNode(true);
+        visualContainer.className = "w-full h-full flex items-center justify-center card-image-bg relative overflow-hidden bg-white"; 
+        
+        // Remove hover animations from the clone for the modal view
+        const innerAnimatedEl = visualContainer.querySelector('.group-hover\\:scale-110');
+        if(innerAnimatedEl) {
+            innerAnimatedEl.classList.remove('group-hover:scale-110');
+        }
+        
+        // Make emojis larger in the modal by targeting the container (if it's an emoji)
+        const emojiContainer = visualContainer.querySelector('.text-6xl');
+        if(emojiContainer) {
+            emojiContainer.classList.remove('text-6xl', 'sm:text-7xl');
+            emojiContainer.classList.add('text-8xl', 'sm:text-9xl'); // Bigger for the modal
+        }
+
+        // Populate Modal
+        modalVisual.innerHTML = '';
+        modalVisual.appendChild(visualContainer);
+        modalTitle.innerText = title;
+        modalPrice.innerText = price;
+        modalDesc.innerText = desc;
+        modalAllergens.innerHTML = allergensHTML;
+
+        // Show Modal
+        modal.classList.remove('hidden');
+        // Force reflow for smooth transition
+        void modal.offsetWidth; 
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent body scrolling behind modal
+    }
+
+    // Function to close modal
+    function closeModal() {
+        modal.classList.remove('active');
+        // Wait for CSS transition to finish before hiding completely
+        setTimeout(() => {
+            modal.classList.add('hidden');
+            document.body.style.overflow = ''; 
+        }, 300);
+    }
+
+    // Attach listeners to all product cards
+    document.querySelectorAll('.product-card').forEach(card => {
+        card.classList.add('cursor-pointer'); // Make mouse turn into pointer
+        card.addEventListener('click', () => openModal(card));
+    });
+
+    // Close listeners
+    closeModalBtn.addEventListener('click', closeModal);
+    modalBackdrop.addEventListener('click', closeModal);
+
+    // Close on Escape key press
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+            closeModal();
+        }
+    });
+</script>
+</body>
+</html>
