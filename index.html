@@ -55,16 +55,6 @@
             box-shadow: 0 20px 25px -5px rgba(92, 64, 51, 0.1), 0 10px 10px -5px rgba(92, 64, 51, 0.04);
             border-color: #E8A274;
         }
-
-        .allergen-tooltip {
-            visibility: hidden;
-            opacity: 0;
-            transition: opacity 0.2s;
-        }
-        .allergen-icon:hover .allergen-tooltip {
-            visibility: visible;
-            opacity: 1;
-        }
         
         /* Schedule Animation */
         .schedule-card:hover .day-badge {
@@ -179,10 +169,10 @@
                     </div>
                 </article>
 
-                <!-- Product 2 (Croissant normal - ACTUALITZAT ÚLTIM) -->
+                <!-- Product 2 (Croissant normal - ACTUALITZAT) -->
                 <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group cursor-pointer" onclick="openModal(this)">
                     <div class="h-48 border-b border-beige overflow-hidden relative bg-white flex items-center justify-center">
-                        <div class="w-48 h-48 group-hover:scale-110 transition-transform duration-500 bg-no-repeat" style="background-image: url('Captura de pantalla 2026-05-13 194735_2.png'); background-size: contain; background-position: center;"></div>
+                        <div class="w-48 h-48 group-hover:scale-110 transition-transform duration-500 bg-no-repeat" style="background-image: url('Captura de pantalla 2026-05-13 194735.png'); background-size: contain; background-position: center;"></div>
                     </div>
                     <div class="p-6">
                         <div class="flex justify-between items-start mb-2">
@@ -273,7 +263,7 @@
                     </div>
                 </article>
 
-                <!-- Product 6.5 (Ensaimada) -->
+                <!-- Product 6.5 (Ensaimada - ACTUALITZAT) -->
                 <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group cursor-pointer" onclick="openModal(this)">
                     <div class="h-48 border-b border-beige overflow-hidden relative bg-white flex items-center justify-center">
                         <div class="w-48 h-48 group-hover:scale-110 transition-transform duration-500 bg-no-repeat" style="background-image: url('ChatGPT Image 13 may 2026, 19_36_12.png'); background-size: contain; background-position: center;"></div>
@@ -481,7 +471,9 @@
                 </article>
 
             </div>
-<!-- ... existing code ... -->
+        </div>
+    </section>
+
     <!-- Activities / Surprises Section -->
     <section id="activitats" class="py-16 bg-beige/50 border-t border-b border-beige">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -564,150 +556,153 @@
             </div>
             
             <div class="border-t border-coffee/30 pt-8 text-center text-coffee-light text-sm">
-                <p>&copy; <span id="currentYear"></span> LA BOTIGUETA. Tots els drets reservats.</p>
-            </div>
+            <p>&copy; <span id="currentYear"></span> LA BOTIGUETA. Tots els drets reservats.</p>
         </div>
-    </footer>
+    </div>
+</footer>
 
-    <!-- Product Modal (Lightbox) -->
-    <div id="productModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 sm:p-6">
-        <!-- Backdrop -->
-        <div id="modalBackdrop" class="absolute inset-0 bg-coffee-dark/80 backdrop-blur-sm transition-opacity cursor-pointer"></div>
+<!-- Product Modal (Lightbox) -->
+<div id="productModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 sm:p-6">
+    <!-- Backdrop -->
+    <div id="modalBackdrop" class="absolute inset-0 bg-coffee-dark/80 backdrop-blur-sm transition-opacity cursor-pointer"></div>
+    
+    <!-- Modal Content -->
+    <div id="modalContentWrapper" class="bg-cream rounded-3xl max-w-4xl w-full relative z-10 overflow-hidden shadow-2xl transform transition-all duration-300 scale-95 opacity-0 flex flex-col md:flex-row max-h-[90vh]">
         
-        <!-- Modal Content -->
-        <div id="modalContentWrapper" class="bg-cream rounded-3xl max-w-4xl w-full relative z-10 overflow-hidden shadow-2xl transform transition-all duration-300 scale-95 opacity-0 flex flex-col md:flex-row max-h-[90vh]">
+        <!-- Close Button -->
+        <button id="closeModalBtn" class="absolute top-4 right-4 bg-white/90 hover:bg-white text-coffee-dark rounded-full p-2 z-20 shadow-sm transition-colors focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+        
+        <!-- Visual Area (Image/Emoji) -->
+        <div id="modalVisual" class="w-full md:w-1/2 h-64 md:h-auto flex items-center justify-center bg-beige/30 border-b md:border-b-0 md:border-r border-beige">
+            <!-- Content injected via JS -->
+        </div>
+        
+        <!-- Text Area -->
+        <div class="w-full md:w-1/2 p-6 md:p-10 flex flex-col justify-center overflow-y-auto">
+            <h3 id="modalTitle" class="text-3xl md:text-4xl font-serif font-bold text-coffee-dark mb-2"></h3>
+            <span id="modalPrice" class="text-2xl font-bold text-garnet mb-6 block"></span>
+            <p id="modalDesc" class="text-gray-600 text-lg mb-8 leading-relaxed"></p>
             
-            <!-- Close Button -->
-            <button id="closeModalBtn" class="absolute top-4 right-4 bg-white/90 hover:bg-white text-coffee-dark rounded-full p-2 z-20 shadow-sm transition-colors focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-            </button>
-            
-            <!-- Visual Area (Image/Emoji) -->
-            <div id="modalVisual" class="w-full md:w-1/2 h-64 md:h-auto flex items-center justify-center bg-beige/30 border-b md:border-b-0 md:border-r border-beige">
-                <!-- Content injected via JS -->
-            </div>
-            
-            <!-- Text Area -->
-            <div class="w-full md:w-1/2 p-6 md:p-10 flex flex-col justify-center overflow-y-auto">
-                <h3 id="modalTitle" class="text-3xl md:text-4xl font-serif font-bold text-coffee-dark mb-2"></h3>
-                <span id="modalPrice" class="text-2xl font-bold text-garnet mb-6 block"></span>
-                <p id="modalDesc" class="text-gray-600 text-lg mb-8 leading-relaxed"></p>
-                
-                <div>
-                    <h4 class="text-sm font-bold text-coffee-light uppercase tracking-wider mb-3">Conté els següents al·lèrgens:</h4>
-                    <div id="modalAllergens" class="flex gap-2 flex-wrap">
-                        <!-- Content injected via JS -->
-                    </div>
+            <div>
+                <h4 class="text-sm font-bold text-coffee-light uppercase tracking-wider mb-3">Conté els següents al·lèrgens:</h4>
+                <div id="modalAllergens" class="flex gap-2 flex-wrap">
+                    <!-- Content injected via JS -->
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- JavaScript for Mobile Menu, Utilities & Modal -->
-    <script>
-        // Set current year in footer
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
+<!-- JavaScript for Mobile Menu, Utilities & Modal -->
+<script>
+    // Set current year in footer
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-        // Mobile Menu Toggle
-        const btn = document.getElementById('mobile-menu-btn');
-        const menu = document.getElementById('mobile-menu');
+    // Mobile Menu Toggle
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
 
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
+    btn.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+    });
+
+    // Close mobile menu when clicking a link
+    const menuLinks = menu.querySelectorAll('a');
+    menuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            menu.classList.add('hidden');
         });
+    });
 
-        // Close mobile menu when clicking a link
-        const menuLinks = menu.querySelectorAll('a');
-        menuLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                menu.classList.add('hidden');
-            });
-        });
+    // Navbar shadow on scroll
+    window.addEventListener('scroll', () => {
+        const nav = document.getElementById('navbar');
+        if (window.scrollY > 10) {
+            nav.classList.add('shadow-md');
+            nav.classList.remove('shadow-sm');
+        } else {
+            nav.classList.remove('shadow-md');
+            nav.classList.add('shadow-sm');
+        }
+    });
 
-        // Navbar shadow on scroll
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 10) {
-                nav.classList.add('shadow-md');
-                nav.classList.remove('shadow-sm');
-            } else {
-                nav.classList.remove('shadow-md');
-                nav.classList.add('shadow-sm');
-            }
-        });
+    // --- Product Modal Logic ---
+    const modal = document.getElementById('productModal');
+    const modalContentWrapper = document.getElementById('modalContentWrapper');
+    const modalVisual = document.getElementById('modalVisual');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalPrice = document.getElementById('modalPrice');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalAllergens = document.getElementById('modalAllergens');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const modalBackdrop = document.getElementById('modalBackdrop');
 
-        // --- Product Modal Logic ---
-        const modal = document.getElementById('productModal');
-        const modalContentWrapper = document.getElementById('modalContentWrapper');
-        const modalVisual = document.getElementById('modalVisual');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalPrice = document.getElementById('modalPrice');
-        const modalDesc = document.getElementById('modalDesc');
-        const modalAllergens = document.getElementById('modalAllergens');
-        const closeModalBtn = document.getElementById('closeModalBtn');
-        const modalBackdrop = document.getElementById('modalBackdrop');
-
-        // Function to open modal
-        function openModal(card) {
-            // Extract data from the clicked card
-            const title = card.querySelector('h5').innerText;
-            const price = card.querySelector('.text-garnet').innerText;
-            const desc = card.querySelector('.text-gray-600').innerText;
-            const allergensHTML = card.querySelector('.border-t').innerHTML;
-            
-            // Extract and clean up the visual element
-            const visualContainer = card.querySelector('.h-48').cloneNode(true);
-            visualContainer.className = "w-full h-full flex items-center justify-center relative overflow-hidden bg-white"; 
-            
-            // Remove hover animations from the clone and enlarge the icon for the modal view
-            const innerAnimatedEl = visualContainer.querySelector('.group-hover\\:scale-110');
-            if(innerAnimatedEl) {
-                innerAnimatedEl.classList.remove('group-hover:scale-110', 'w-48', 'h-48', 'translate-y-4', 'translate-y-5', 'translate-y-6');
-                // Assign a bigger fixed square size for the modal
-                innerAnimatedEl.classList.add('w-64', 'h-64', 'sm:w-72', 'sm:h-72');
-            }
-
-            // Populate Modal
-            modalVisual.innerHTML = '';
-            modalVisual.appendChild(visualContainer);
-            modalTitle.innerText = title;
-            modalPrice.innerText = price;
-            modalDesc.innerText = desc;
-            modalAllergens.innerHTML = allergensHTML;
-
-            // Show Modal
-            modal.classList.remove('hidden');
-            // Force reflow for smooth transition
-            void modal.offsetWidth; 
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent body scrolling behind modal
+    // Function to open modal
+    function openModal(card) {
+        // Extract data from the clicked card
+        const title = card.querySelector('h5').innerText;
+        const price = card.querySelector('.text-garnet').innerText;
+        const desc = card.querySelector('.text-gray-600').innerText;
+        const allergensHTML = card.querySelector('.border-t').innerHTML;
+        
+        // Extract and clean up the visual element
+        const visualContainer = card.querySelector('.h-48').cloneNode(true);
+        visualContainer.className = "w-full h-full flex items-center justify-center relative overflow-hidden bg-white"; 
+        
+        // Remove hover animations from the clone and enlarge the icon for the modal view
+        const innerAnimatedEl = visualContainer.querySelector('.group-hover\\:scale-110');
+        if(innerAnimatedEl) {
+            innerAnimatedEl.classList.remove('group-hover:scale-110', 'w-48', 'h-48', 'translate-y-4', 'translate-y-5', 'translate-y-6');
+            // Assign a bigger fixed square size for the modal
+            innerAnimatedEl.classList.add('w-64', 'h-64', 'sm:w-72', 'sm:h-72');
         }
 
-        // Function to close modal
-        function closeModal() {
-            modal.classList.remove('active');
-            // Wait for CSS transition to finish before hiding completely
-            setTimeout(() => {
-                modal.classList.add('hidden');
-                document.body.style.overflow = ''; 
-            }, 300);
+        // Populate Modal
+        modalVisual.innerHTML = '';
+        modalVisual.appendChild(visualContainer);
+        modalTitle.innerText = title;
+        modalPrice.innerText = price;
+        modalDesc.innerText = desc;
+        modalAllergens.innerHTML = allergensHTML;
+
+        // Show Modal
+        modal.classList.remove('hidden');
+        // Force reflow for smooth transition
+        void modal.offsetWidth; 
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent body scrolling behind modal
+    }
+
+    // Function to close modal
+    function closeModal() {
+        modal.classList.remove('active');
+        // Wait for CSS transition to finish before hiding completely
+        setTimeout(() => {
+            modal.classList.add('hidden');
+            document.body.style.overflow = ''; 
+        }, 300);
+    }
+
+    // Attach listeners to all product cards
+    document.querySelectorAll('.product-card').forEach(card => {
+        // Make mouse turn into pointer only on elements with onclick
+        if(card.hasAttribute('onclick')) {
+            card.classList.add('cursor-pointer');
         }
+    });
 
-        // Attach listeners to all product cards
-        document.querySelectorAll('.product-card').forEach(card => {
-            card.addEventListener('click', () => openModal(card));
-        });
+    // Close listeners
+    closeModalBtn.addEventListener('click', closeModal);
+    modalBackdrop.addEventListener('click', closeModal);
 
-        // Close listeners
-        closeModalBtn.addEventListener('click', closeModal);
-        modalBackdrop.addEventListener('click', closeModal);
-
-        // Close on Escape key press
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
-                closeModal();
-            }
-        });
-    </script>
+    // Close on Escape key press
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+            closeModal();
+        }
+    });
+</script>
 </body>
 </html>
