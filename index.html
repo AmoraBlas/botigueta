@@ -33,6 +33,7 @@
         }
     </script>
     <style>
+        /* Custom Styles for smooth scrolling and animations */
         html { scroll-behavior: smooth; }
         
         .hero-pattern {
@@ -41,6 +42,11 @@
             background-size: 20px 20px;
         }
 
+        .card-image-bg {
+            background: linear-gradient(135deg, #FDFBF7 0%, #F5EFE6 100%);
+        }
+
+        /* Hover animation for product cards */
         .product-card {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -49,7 +55,8 @@
             box-shadow: 0 20px 25px -5px rgba(92, 64, 51, 0.1), 0 10px 10px -5px rgba(92, 64, 51, 0.04);
             border-color: #E8A274;
         }
-
+        
+        /* Schedule Animation */
         .schedule-card:hover .day-badge {
             background-color: #8B3A3A;
             color: #FDFBF7;
@@ -64,6 +71,7 @@
 </head>
 <body class="bg-cream text-coffee-dark font-sans antialiased selection:bg-pastel selection:text-coffee-dark">
 
+    <!-- Header / Navbar -->
     <header class="fixed w-full top-0 z-50 bg-cream/90 backdrop-blur-md border-b border-beige shadow-sm transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
@@ -94,6 +102,7 @@
         </div>
     </header>
 
+    <!-- Hero Section -->
     <section id="inici" class="pt-32 pb-20 md:pt-40 md:pb-28 hero-pattern relative overflow-hidden">
         <div class="absolute inset-0 bg-coffee-dark/80"></div> <!-- Overlay -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
@@ -115,6 +124,7 @@
         </div>
     </section>
 
+    <!-- Menu Section -->
     <section id="menu" class="py-16 bg-cream">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
@@ -136,10 +146,11 @@
                 </div>
             </div>
 
+            <!-- Products Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 
                 <!-- Product 1 (Croissant de xocolata) -->
-                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group cursor-pointer">
+                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group cursor-pointer" onclick="openModal(this)">
                     <div class="h-48 border-b border-beige overflow-hidden relative bg-white flex items-center justify-center">
                         <div class="w-48 h-48 group-hover:scale-110 transition-transform duration-500 bg-no-repeat" style="background-image: url('ChatGPT%20Image%205%20may%202026,%2011_37_55.png'); background-size: 200% 200%; background-position: 0% 0%;"></div>
                     </div>
@@ -158,10 +169,10 @@
                     </div>
                 </article>
 
-                <!-- Product 2 (Croissant normal) -->
-                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group cursor-pointer">
+                <!-- Product 2 (Croissant normal - ACTUALITZAT) -->
+                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group cursor-pointer" onclick="openModal(this)">
                     <div class="h-48 border-b border-beige overflow-hidden relative bg-white flex items-center justify-center">
-                        <div class="w-48 h-48 group-hover:scale-110 transition-transform duration-500 bg-no-repeat" style="background-image: url('ChatGPT%20Image%205%20may%202026,%2011_45_11.png'); background-size: 200% 200%; background-position: 0% 0%;"></div>
+                        <div class="w-48 h-48 group-hover:scale-110 transition-transform duration-500 bg-no-repeat" style="background-image: url('Captura%20de%20pantalla%202026-05-13%20194735.png'); background-size: contain; background-position: center;"></div>
                     </div>
                     <div class="p-6">
                         <div class="flex justify-between items-start mb-2">
@@ -178,7 +189,7 @@
                 </article>
 
                 <!-- Product 3 (Coca de crema) -->
-                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group cursor-pointer">
+                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group cursor-pointer" onclick="openModal(this)">
                     <div class="h-48 border-b border-beige overflow-hidden relative bg-white flex items-center justify-center">
                         <div class="w-48 h-48 translate-y-4 group-hover:scale-110 transition-transform duration-500 bg-no-repeat" style="background-image: url('ChatGPT%20Image%205%20may%202026,%2011_41_50.png'); background-size: 200% 200%; background-position: 0% 100%;"></div>
                     </div>
@@ -198,7 +209,7 @@
                 </article>
 
                 <!-- Product 4 (Coca de recapte) -->
-                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group cursor-pointer">
+                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group cursor-pointer" onclick="openModal(this)">
                     <div class="h-48 border-b border-beige overflow-hidden relative bg-white flex items-center justify-center">
                         <div class="w-48 h-48 group-hover:scale-110 transition-transform duration-500 bg-no-repeat" style="background-image: url('ChatGPT%20Image%205%20may%202026,%2011_41_50.png'); background-size: 200% 200%; background-position: 0% 0%;"></div>
                     </div>
@@ -216,7 +227,7 @@
                 </article>
 
                 <!-- Product 5 (Pizza) -->
-                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group cursor-pointer">
+                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group cursor-pointer" onclick="openModal(this)">
                     <div class="h-48 border-b border-beige overflow-hidden relative bg-white flex items-center justify-center">
                         <div class="w-48 h-48 group-hover:scale-110 transition-transform duration-500 bg-no-repeat" style="background-image: url('ChatGPT%20Image%205%20may%202026,%2011_37_49.png'); background-size: 200% 200%; background-position: 100% 100%;"></div>
                     </div>
@@ -234,7 +245,7 @@
                 </article>
 
                 <!-- Product 6 (Rotllos de canyella) -->
-                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group cursor-pointer">
+                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group cursor-pointer" onclick="openModal(this)">
                     <div class="h-48 border-b border-beige overflow-hidden relative bg-white flex items-center justify-center">
                         <div class="w-48 h-48 group-hover:scale-110 transition-transform duration-500 bg-no-repeat" style="background-image: url('ChatGPT%20Image%205%20may%202026,%2011_41_50.png'); background-size: 200% 200%; background-position: 100% 100%;"></div>
                     </div>
@@ -252,8 +263,8 @@
                     </div>
                 </article>
 
-                <!-- Product 6.5 (Ensaimada) -->
-                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group cursor-pointer">
+                <!-- Product 6.5 (Ensaimada - ACTUALITZAT) -->
+                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group cursor-pointer" onclick="openModal(this)">
                     <div class="h-48 border-b border-beige overflow-hidden relative bg-white flex items-center justify-center">
                         <div class="w-48 h-48 group-hover:scale-110 transition-transform duration-500 bg-no-repeat" style="background-image: url('ChatGPT%20Image%2013%20may%202026,%2019_36_12.png'); background-size: contain; background-position: center;"></div>
                     </div>
@@ -272,7 +283,7 @@
                 </article>
 
                 <!-- Product 7 (Pastís de pastanaga) -->
-                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group cursor-pointer">
+                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group cursor-pointer" onclick="openModal(this)">
                     <div class="h-48 border-b border-beige overflow-hidden relative bg-white flex items-center justify-center">
                         <div class="w-48 h-48 group-hover:scale-110 transition-transform duration-500 bg-no-repeat" style="background-image: url('ChatGPT%20Image%205%20may%202026,%2011_37_55.png'); background-size: 200% 200%; background-position: 0% 100%;"></div>
                     </div>
@@ -292,7 +303,7 @@
                 </article>
 
                 <!-- Product 8 (Red velvet) -->
-                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group cursor-pointer">
+                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group cursor-pointer" onclick="openModal(this)">
                     <div class="h-48 border-b border-beige overflow-hidden relative bg-white flex items-center justify-center">
                         <div class="w-48 h-48 group-hover:scale-110 transition-transform duration-500 bg-no-repeat" style="background-image: url('Captura%20de%20pantalla%202026-05-07%20093930.png'); background-size: contain; background-position: center;"></div>
                     </div>
@@ -311,7 +322,7 @@
                 </article>
 
                 <!-- Product 9 (Galetes de mantega) -->
-                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group cursor-pointer">
+                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group cursor-pointer" onclick="openModal(this)">
                     <div class="h-48 border-b border-beige overflow-hidden relative bg-white flex items-center justify-center">
                         <div class="w-48 h-48 group-hover:scale-110 transition-transform duration-500 bg-no-repeat" style="background-image: url('Captura%20de%20pantalla%202026-05-07%20091040.png'); background-size: contain; background-position: center;"></div>
                     </div>
@@ -330,7 +341,7 @@
                 </article>
 
                 <!-- Product 10 (Xuxos de crema) -->
-                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group cursor-pointer">
+                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group cursor-pointer" onclick="openModal(this)">
                     <div class="h-48 border-b border-beige overflow-hidden relative bg-white flex items-center justify-center">
                         <div class="w-48 h-48 group-hover:scale-110 transition-transform duration-500 bg-no-repeat" style="background-image: url('ChatGPT%20Image%205%20may%202026,%2011_37_49.png'); background-size: 200% 200%; background-position: 0% 0%;"></div>
                     </div>
@@ -349,7 +360,7 @@
                 </article>
 
                 <!-- Product 11 (Magdalenes) -->
-                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group cursor-pointer">
+                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group cursor-pointer" onclick="openModal(this)">
                     <div class="h-48 border-b border-beige overflow-hidden relative bg-white flex items-center justify-center">
                         <div class="w-48 h-48 group-hover:scale-110 transition-transform duration-500 bg-no-repeat" style="background-image: url('Captura%20de%20pantalla%202026-05-07%20091348.png'); background-size: contain; background-position: center;"></div>
                     </div>
@@ -368,7 +379,7 @@
                 </article>
 
                 <!-- Product 12 (Pastís de Santiago) -->
-                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group relative cursor-pointer">
+                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group relative cursor-pointer" onclick="openModal(this)">
                     <div class="absolute top-4 right-4 bg-pastel text-coffee-dark text-xs font-bold px-2 py-1 rounded-full shadow z-10">Sense Gluten</div>
                     <div class="h-48 border-b border-beige overflow-hidden relative bg-white flex items-center justify-center">
                         <div class="w-48 h-48 group-hover:scale-110 transition-transform duration-500 bg-no-repeat" style="background-image: url('ChatGPT%20Image%205%20may%202026,%2011_45_11.png'); background-size: 200% 200%; background-position: 100% 100%;"></div>
@@ -387,7 +398,7 @@
                 </article>
 
                 <!-- Product 12.5 (Pastís de cireres) -->
-                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group cursor-pointer">
+                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group cursor-pointer" onclick="openModal(this)">
                     <div class="h-48 border-b border-beige overflow-hidden relative bg-white flex items-center justify-center">
                         <div class="w-48 h-48 group-hover:scale-110 transition-transform duration-500 bg-no-repeat" style="background-image: url('Captura%20de%20pantalla%202026-05-07%20091411.png'); background-size: contain; background-position: center;"></div>
                     </div>
@@ -406,7 +417,7 @@
                 </article>
 
                 <!-- Product 13 (Pa de massa mare) -->
-                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group cursor-pointer">
+                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group cursor-pointer" onclick="openModal(this)">
                     <div class="h-48 border-b border-beige overflow-hidden relative bg-white flex items-center justify-center">
                         <div class="w-48 h-48 translate-y-4 group-hover:scale-110 transition-transform duration-500 bg-no-repeat" style="background-image: url('ChatGPT%20Image%205%20may%202026,%2011_37_49.png'); background-size: 200% 200%; background-position: 0% 100%;"></div>
                     </div>
@@ -423,7 +434,7 @@
                 </article>
 
                 <!-- Product 14 (Pa de llavors) -->
-                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group cursor-pointer">
+                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group cursor-pointer" onclick="openModal(this)">
                     <div class="h-48 border-b border-beige overflow-hidden relative bg-white flex items-center justify-center">
                         <div class="w-48 h-48 group-hover:scale-110 transition-transform duration-500 bg-no-repeat" style="background-image: url('ChatGPT%20Image%205%20may%202026,%2011_37_49.png'); background-size: 200% 200%; background-position: 100% 0%;"></div>
                     </div>
@@ -440,7 +451,7 @@
                 </article>
 
                 <!-- Product 15 (Bossa de catànies) -->
-                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group relative cursor-pointer">
+                <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group relative cursor-pointer" onclick="openModal(this)">
                     <div class="absolute top-4 right-4 bg-pastel text-coffee-dark text-xs font-bold px-2 py-1 rounded-full shadow z-10">Sense Gluten</div>
                     <div class="h-48 border-b border-beige overflow-hidden relative bg-white flex items-center justify-center">
                         <div class="w-48 h-48 group-hover:scale-110 transition-transform duration-500 bg-no-repeat" style="background-image: url('ChatGPT%20Image%205%20may%202026,%2011_41_50.png'); background-size: 200% 200%; background-position: 100% 0%;"></div>
@@ -463,6 +474,7 @@
         </div>
     </section>
 
+    <!-- Activities / Surprises Section -->
     <section id="activitats" class="py-16 bg-beige/50 border-t border-b border-beige">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
@@ -505,6 +517,7 @@
         </div>
     </section>
 
+    <!-- Footer / Contact -->
     <footer id="contacte" class="bg-coffee-dark text-beige pt-16 pb-8 border-t-4 border-pastel">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12 text-center md:text-left">
@@ -548,6 +561,7 @@
     </div>
 </footer>
 
+<!-- Product Modal (Lightbox) -->
 <div id="productModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 sm:p-6">
     <!-- Backdrop -->
     <div id="modalBackdrop" class="absolute inset-0 bg-coffee-dark/80 backdrop-blur-sm transition-opacity cursor-pointer"></div>
@@ -581,6 +595,7 @@
     </div>
 </div>
 
+<!-- JavaScript for Mobile Menu, Utilities & Modal -->
 <script>
     // Set current year in footer
     document.getElementById('currentYear').textContent = new Date().getFullYear();
@@ -672,7 +687,10 @@
 
     // Attach listeners to all product cards
     document.querySelectorAll('.product-card').forEach(card => {
-        card.addEventListener('click', () => openModal(card));
+        // Make mouse turn into pointer only on elements with onclick
+        if(card.hasAttribute('onclick')) {
+            card.classList.add('cursor-pointer');
+        }
     });
 
     // Close listeners
