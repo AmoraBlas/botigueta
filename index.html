@@ -33,7 +33,6 @@
         }
     </script>
     <style>
-        /* Custom Styles for smooth scrolling and animations */
         html { scroll-behavior: smooth; }
         
         .hero-pattern {
@@ -65,7 +64,6 @@
 </head>
 <body class="bg-cream text-coffee-dark font-sans antialiased selection:bg-pastel selection:text-coffee-dark">
 
-    <!-- Header / Navbar -->
     <header class="fixed w-full top-0 z-50 bg-cream/90 backdrop-blur-md border-b border-beige shadow-sm transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
@@ -96,7 +94,6 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section id="inici" class="pt-32 pb-20 md:pt-40 md:pb-28 hero-pattern relative overflow-hidden">
         <div class="absolute inset-0 bg-coffee-dark/80"></div> <!-- Overlay -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
@@ -118,7 +115,6 @@
         </div>
     </section>
 
-    <!-- Menu Section -->
     <section id="menu" class="py-16 bg-cream">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
@@ -140,7 +136,6 @@
                 </div>
             </div>
 
-            <!-- Products Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 
                 <!-- Product 1 (Croissant de xocolata) -->
@@ -468,7 +463,6 @@
         </div>
     </section>
 
-    <!-- Activities / Surprises Section -->
     <section id="activitats" class="py-16 bg-beige/50 border-t border-b border-beige">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
@@ -511,7 +505,6 @@
         </div>
     </section>
 
-    <!-- Footer / Contact -->
     <footer id="contacte" class="bg-coffee-dark text-beige pt-16 pb-8 border-t-4 border-pastel">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12 text-center md:text-left">
@@ -555,7 +548,6 @@
     </div>
 </footer>
 
-<!-- Product Modal (Lightbox) -->
 <div id="productModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 sm:p-6">
     <!-- Backdrop -->
     <div id="modalBackdrop" class="absolute inset-0 bg-coffee-dark/80 backdrop-blur-sm transition-opacity cursor-pointer"></div>
@@ -589,7 +581,6 @@
     </div>
 </div>
 
-<!-- JavaScript for Mobile Menu, Utilities & Modal -->
 <script>
     // Set current year in footer
     document.getElementById('currentYear').textContent = new Date().getFullYear();
