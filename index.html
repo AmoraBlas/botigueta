@@ -55,6 +55,16 @@
             box-shadow: 0 20px 25px -5px rgba(92, 64, 51, 0.1), 0 10px 10px -5px rgba(92, 64, 51, 0.04);
             border-color: #E8A274;
         }
+
+        .allergen-tooltip {
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .allergen-icon:hover .allergen-tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
         
         /* Schedule Animation */
         .schedule-card:hover .day-badge {
@@ -172,7 +182,7 @@
                 <!-- Product 2 (Croissant normal - ACTUALITZAT) -->
                 <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group cursor-pointer" onclick="openModal(this)">
                     <div class="h-48 border-b border-beige overflow-hidden relative bg-white flex items-center justify-center">
-                        <div class="w-48 h-48 group-hover:scale-110 transition-transform duration-500 bg-no-repeat" style="background-image: url('Captura de pantalla 2026-05-13 194735.png'); background-size: contain; background-position: center;"></div>
+                        <div class="w-48 h-48 group-hover:scale-110 transition-transform duration-500 bg-no-repeat" style="background-image: url('croissant.png'); background-size: contain; background-position: center;"></div>
                     </div>
                     <div class="p-6">
                         <div class="flex justify-between items-start mb-2">
@@ -263,7 +273,7 @@
                     </div>
                 </article>
 
-                <!-- Product 6.5 (Ensaimada - ACTUALITZAT) -->
+                <!-- Product 6.5 (Ensaimada) -->
                 <article class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-beige group cursor-pointer" onclick="openModal(this)">
                     <div class="h-48 border-b border-beige overflow-hidden relative bg-white flex items-center justify-center">
                         <div class="w-48 h-48 group-hover:scale-110 transition-transform duration-500 bg-no-repeat" style="background-image: url('ChatGPT Image 13 may 2026, 19_36_12.png'); background-size: contain; background-position: center;"></div>
@@ -686,23 +696,16 @@
     }
 
     // Attach listeners to all product cards
-    document.querySelectorAll('.product-card').forEach(card => {
-        // Make mouse turn into pointer only on elements with onclick
-        if(card.hasAttribute('onclick')) {
-            card.classList.add('cursor-pointer');
-        }
-    });
-
-    // Close listeners
-    closeModalBtn.addEventListener('click', closeModal);
-    modalBackdrop.addEventListener('click', closeModal);
-
-    // Close on Escape key press
+    // The visual clicks are handled by the onclick attribute directly on the articles
+    // Attach listener to escape
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
             closeModal();
         }
     });
+
+    closeModalBtn.addEventListener('click', closeModal);
+    modalBackdrop.addEventListener('click', closeModal);
 </script>
 </body>
 </html>
